@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-        
+
         :root {
             --bg-primary: #0a0a0a;
             --text-primary: #ffffff;
@@ -143,6 +144,27 @@
             max-width: 600px;
             margin-bottom: 2rem;
             font-size: 1.1rem;
+        }
+
+
+        .pdf-link {
+            background-color: var(--accent);
+            color: var(--bg-primary) !important;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .pdf-link:hover {
+            background-color: #4cd9b9;
+            transform: translateY(-2px);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            align-items: center;
         }
 
         /* Sections */
@@ -306,36 +328,37 @@
             transform: scale(1.1);
         }
 
-        /* Cursor */
+        /* 기존 cursor 스타일을 아래와 같이 변경 */
         .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
             background: var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
+            opacity: 0.7;
             transition: transform 0.2s ease;
+        }
+
+        .cursor-follower {
+            display: none;
+            /* 두 번째 커서는 제거 */
         }
 
         /* Animations */
         @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .scroll-animation {
@@ -363,7 +386,8 @@
                 padding: 0 1rem;
             }
 
-            .cursor, .cursor-follower {
+            .cursor,
+            .cursor-follower {
                 display: none;
             }
 
@@ -373,6 +397,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -394,8 +419,8 @@
             <h1 class="hero-title">김찬규</h1>
             <h2 class="hero-subtitle">Software Engineer</h2>
             <p class="hero-description">
-                혁신적인 웹 솔루션을 만드는 풀스택 개발자입니다. 
-                사용자 중심의 개발과 최신 기술 트렌드를 접목시켜 
+                혁신적인 웹 솔루션을 만드는 풀스택 개발자입니다.
+                사용자 중심의 개발과 최신 기술 트렌드를 접목시켜
                 가치 있는 서비스를 만들어내는 것을 추구합니다.
             </p>
         </div>
@@ -434,8 +459,8 @@
                 <img src="/api/placeholder/400/200" alt="Project 1" class="project-image">
                 <div class="project-content">
                     <h3 class="project-title">Project 1</h3>
-                    <p>혁신적인 웹 애플리케이션 개발 프로젝트입니다. 
-                       사용자 경험을 최우선으로 고려하여 설계하였습니다.</p>
+                    <p>혁신적인 웹 애플리케이션 개발 프로젝트입니다.
+                        사용자 경험을 최우선으로 고려하여 설계하였습니다.</p>
                     <div class="project-tech">
                         <span class="tech-tag">React</span>
                         <span class="tech-tag">Node.js</span>
@@ -446,6 +471,10 @@
                             <i class="fab fa-github"></i>
                             <span>Source Code</span>
                         </a>
+                        <a href="/path/to/your/project1.pdf" class="project-link pdf-link" download>
+                            <i class="fas fa-file-pdf"></i>
+                            <span>View Project</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -453,8 +482,8 @@
                 <img src="/api/placeholder/400/200" alt="Project 2" class="project-image">
                 <div class="project-content">
                     <h3 class="project-title">Project 2</h3>
-                    <p>데이터 분석과 머신러닝을 활용한 
-                       예측 시스템 개발 프로젝트입니다.</p>
+                    <p>데이터 분석과 머신러닝을 활용한
+                        예측 시스템 개발 프로젝트입니다.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Django</span>
@@ -567,6 +596,35 @@
             });
         });
 
+
+
+        // PDF 링크 처리
+        document.querySelectorAll('.pdf-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const pdfUrl = this.getAttribute('href');
+
+                // PDF 다운로드
+                fetch(pdfUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // PDF 파일을 새 창에서 열기
+                        const fileUrl = URL.createObjectURL(blob);
+                        window.open(fileUrl, '_blank');
+
+                        // 다운로드도 같이 실행
+                        const a = document.createElement('a');
+                        a.href = fileUrl;
+                        a.download = pdfUrl.split('/').pop();
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(fileUrl);
+                    })
+                    .catch(error => console.error('PDF 처리 중 오류:', error));
+            });
+        });
+
         // Cursor Hover Effect
         document.querySelectorAll('a, .project-card, .skill-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -585,12 +643,12 @@
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
+
             if (currentScroll <= 0) {
                 navbar.classList.remove('nav-hidden');
                 return;
             }
-            
+
             if (currentScroll > lastScroll && !navbar.classList.contains('nav-hidden')) {
                 navbar.classList.add('nav-hidden');
             } else if (currentScroll < lastScroll && navbar.classList.contains('nav-hidden')) {
@@ -626,7 +684,7 @@
         // Project Cards Hover Effect
         document.querySelectorAll('.project-card').forEach(card => {
             const image = card.querySelector('.project-image');
-            
+
             card.addEventListener('mouseenter', () => {
                 gsap.to(image, {
                     scale: 1.1,
@@ -646,9 +704,9 @@
         function typeEffect(element, speed) {
             const text = element.innerHTML;
             element.innerHTML = '';
-            
+
             let i = 0;
-            const timer = setInterval(function() {
+            const timer = setInterval(function () {
                 if (i < text.length) {
                     element.append(text.charAt(i));
                     i++;
@@ -659,10 +717,11 @@
         }
 
         // Initialize Typing Effect
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const heroSubtitle = document.querySelector('.hero-subtitle');
             typeEffect(heroSubtitle, 100);
         });
     </script>
 </body>
+
 </html>
