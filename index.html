@@ -35,7 +35,6 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
         }
 
         /* Navigation */
@@ -307,7 +306,7 @@
         }
 
         .contact-content {
-            max-width: 600px;
+            max-width: 300px;
             margin: 0 auto;
         }
 
@@ -328,24 +327,7 @@
             transform: scale(1.1);
         }
 
-        /* 기존 cursor 스타일을 아래와 같이 변경 */
-        .cursor {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.7;
-            transition: transform 0.2s ease;
-        }
-
-        .cursor-follower {
-            display: none;
-            /* 두 번째 커서는 제거 */
-        }
-
+    
         /* Animations */
         @keyframes gradientAnimation {
             0% {
@@ -386,21 +368,12 @@
                 padding: 0 1rem;
             }
 
-            .cursor,
-            .cursor-follower {
-                display: none;
-            }
-
-            body {
-                cursor: auto;
-            }
+        
         }
     </style>
 </head>
 
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
 
     <nav class="nav">
         <div class="nav-content">
@@ -420,8 +393,8 @@
             <h2 class="hero-subtitle">Software Engineer</h2>
             <p class="hero-description">
                 혁신적인 웹 솔루션을 만드는 풀스택 개발자입니다.
-                사용자 중심의 개발과 최신 기술 트렌드를 접목시켜
-                가치 있는 서비스를 만들어내는 것을 추구합니다.
+            <br/>사용자 중심의 개발과 최신 기술 트렌드를 접목시켜
+            <br/>가치 있는 서비스를 만들어내는 것을 추구합니다.
             </p>
         </div>
     </section>
@@ -447,7 +420,7 @@
             <div class="skill-card">
                 <i class="fas fa-database skill-icon"></i>
                 <h3>Database</h3>
-                <p>MySQL, PostgreSQL, MongoDB, Redis</p>
+                <p>MySQL, MariaDB, Firebase, OracleXE</p>
             </div>
         </div>
     </section>
@@ -459,7 +432,7 @@
                 <img src="/api/placeholder/400/200" alt="Project 1" class="project-image">
                 <div class="project-content">
                     <h3 class="project-title">Project 1</h3>
-                    <p>혁신적인 웹 애플리케이션 개발 프로젝트입니다.
+                    <p>혁신적인 스마트 냉장고 웹, 앱 애플리케이션 개발 프로젝트입니다.
                         사용자 경험을 최우선으로 고려하여 설계하였습니다.</p>
                     <div class="project-tech">
                         <span class="tech-tag">React</span>
@@ -483,7 +456,7 @@
                 <div class="project-content">
                     <h3 class="project-title">Project 2</h3>
                     <p>데이터 분석과 머신러닝을 활용한
-                        예측 시스템 개발 프로젝트입니다.</p>
+                        꽃 종류 구별 시스템 개발 프로젝트입니다.</p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Django</span>
@@ -579,22 +552,7 @@
             duration: 0.8
         });
 
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', e => {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1
-            });
-            gsap.to(cursorFollower, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.3
-            });
-        });
 
 
 
@@ -622,18 +580,6 @@
                         URL.revokeObjectURL(fileUrl);
                     })
                     .catch(error => console.error('PDF 처리 중 오류:', error));
-            });
-        });
-
-        // Cursor Hover Effect
-        document.querySelectorAll('a, .project-card, .skill-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(1.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
             });
         });
 
