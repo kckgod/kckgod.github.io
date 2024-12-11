@@ -97,6 +97,48 @@
             width: 100%;
         }
 
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -558,29 +600,28 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
         <h2 class="section-title">Skills</h2>
         <div class="skills-grid">
             <div class="skill-card">
                 <i class="fab fa-js skill-icon"></i>
                 <h3>JavaScript</h3>
-                <p>Modern JavaScript (ES6+), React.js, Node.js, Express.js를 활용한 웹 애플리케이션 개발</p>
+                <p>Modern JavaScript (ES6+), React.js, Node.js, Express.js</p>
             </div>
             <div class="skill-card">
                 <i class="fab fa-python skill-icon"></i>
                 <h3>Python</h3>
-                <p>Data Analysis, Django, Flask, Machine Learning 기반 솔루션 개발</p>
+                <p>Data Analysis, Django, Flask, Machine Learning</p>
             </div>
             <div class="skill-card">
                 <i class="fab fa-java skill-icon"></i>
                 <h3>Java</h3>
-                <p>Spring Framework, Spring Boot, JPA를 활용한 엔터프라이즈 애플리케이션 개발</p>
+                <p>Spring Framework, Spring Boot, JPA</p>
             </div>
             <div class="skill-card">
                 <i class="fas fa-database skill-icon"></i>
                 <h3>Database</h3>
-                <p>MySQL, MariaDB, Firebase, OracleXE를 활용한 데이터베이스 설계 및 관리</p>
+                <p>MySQL, MariaDB, Firebase, OracleXE</p>
             </div>
         </div>
     </section>
